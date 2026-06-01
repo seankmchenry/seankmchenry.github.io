@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sean McHenry | Front-end web developer</title>
-  <meta title="description" content="">
-  <meta title="author" content="Sean McHenry">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="css/skull.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Favicons -->
   <link rel="icon" href="cropped-favicon-32x32.png" sizes="32x32">
@@ -14,52 +14,267 @@
   <link rel="apple-touch-icon-precomposed" href="cropped-favicon-180x180.png">
   <meta name="msapplication-TileImage" content="cropped-favicon-270x270.png">
 
-  <!-- Google web fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700|Open+Sans:400,600" rel="stylesheet">
+  <style>
+    /* Custom print styling to ensure seamless PDF export */
+    @media print {
+      body {
+        background-color: #ffffff;
+        color: #000000;
+        font-size: 12pt;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-card {
+        border: 1px solid #e2e8f0;
+        box-shadow: none !important;
+        background: #ffffff !important;
+      }
+      /* Prevents page breaks inside sections when printing to PDF */
+      .avoid-break {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+    }
+
+    a.logo:has(> img) {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: top;
+
+      img {
+        display: block;
+        transition: all 0.75s;
+      }
+
+      &:hover img,
+      &:focus img {
+        transform: scale(1.05);
+      }
+    }
+
+    /* Core fade-in styles */
+    .fade-element {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-element.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Respect system preferences for reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-element {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased min-h-screen py-12 px-4 sm:px-6 lg:px-8">
 
-  <div class="main">
-    <div class="main-info center">
-      <!-- Image -->
-      <img class="main-image main-info__image block mx-auto circle mb2" src="https://en.gravatar.com/userimage/3965074/e4551b2307410b53e3ce454604b11d69.jpg?size=256" alt="Gravatar" width="180" height="180" />
+  <!-- Added 'fade-element' to the main wrapper to transition the whole layout gracefully -->
+  <div class="max-w-4xl mx-auto space-y-8 fade-element">
 
-      <!-- Title -->
-      <h1 class="main-title main-info__title mt0 mb1">Sean McHenry</h1>
+    <!-- TOP ACTIONS (NO-PRINT) -->
+    <div class="flex justify-end space-x-4 no-print">
+      <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded shadow transition duration-150 text-sm flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+        Export to PDF
+      </button>
+    </div>
 
-      <!-- Info -->
-      <span class="main-subtitle main-info__subtitle h3">Front-end developer using WordPress &amp; modern web tools.</span>
+    <!-- SECTION 1: HEADER CARD (ID Style Layout) -->
+    <header class="print-card bg-white rounded-lg shadow-sm border border-gray-200 p-6 sm:p-8 avoid-break">
+      <div class="flex flex-col md:flex-row gap-8 items-start">
 
-      <!-- Icons -->
-      <!-- https://simpleicons.org -->
-      <ul class="main-icons main-info__icons list-reset mt3">
-        <!-- Gmail -->
-        <li><a class="main-icon icon-gmail gmail" href="mailto:seankmchenry@gmail.com" target="_blank" title="Gmail"><img src="img/icons/gmail.svg" alt="Gmail"></a></li>
+        <!-- Left Column: Photo ID Elements -->
+        <div class="w-full md:w-2/5 flex flex-col items-center md:items-start space-y-4 border-b md:border-b-0 md:border-r border-gray-200 pb-6 md:pb-0 md:pr-8">
+          <a href="#" target="_blank" class="logo rounded-lg">
+            <img src="https://avatars.githubusercontent.com/u/1355119?v=4" alt="Profile Photo" class="w-32 h-32 object-cover bg-gray-100 border border-gray-200 shadow-sm">
+          </a>
+
+          <div class="text-center md:text-left w-full">
+            <h1 class="text-2xl font-bold text-gray-900 tracking-tight">Sean McHenry</h1>
+            <p class="text-blue-600 font-medium text-sm mt-1">WordPress Developer</p>
+          </div>
+
+          <div class="w-full space-y-2 text-sm text-gray-600">
+            <div class="flex items-center gap-2">
+              <span class="font-semibold text-gray-900 w-12">Phone:</span>
+              <span>(603) 969-8786</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="font-semibold text-gray-900 w-12">Email:</span>
+              <a href="mailto:seankmchenry@gmail.com" class="text-blue-600 hover:underline">seankmchenry@gmail.com</a>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="font-semibold text-gray-900 w-12">Town:</span>
+              <span>Exeter, NH</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Top Highlights -->
+        <div class="w-full md:w-3/5">
+          <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Highlights & Interests</h2>
+          <ul class="space-y-2 text-gray-600 list-disc pl-5">
+            <li>8+ years of production-level agency experience designing, developing, and scaling custom WordPress architectures.</li>
+            <li>Deep domain expertise across the full site lifecycle—from semantic theme compilation (SCSS/Vite) to managed server deployment (WP Engine/Nexcess).</li>
+            <li>Experienced with WordPress optimization, technical troubleshooting (Query Monitor), and security hardening.</li>
+            <li>Outside of development, you can find me hiking, camping, or fishing around New England, collecting records and spending time with my wife and two daughters.</li>
+          </ul>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- SECTION 2: CURRENT EMPLOYMENT -->
+    <section class="print-card bg-white rounded-lg shadow-sm border border-gray-200 p-6 sm:p-8 avoid-break">
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline border-b border-gray-100 pb-4 mb-4">
+        <div>
+          <h2 class="text-xl font-bold text-gray-900">Brown & Co. Design, Inc.</h2>
+          <p class="text-md text-gray-600 font-medium mt-0.5">Web Developer / Software Generalist</p>
+        </div>
+        <div class="text-sm font-semibold text-blue-600 mt-1 sm:mt-0">
+          <span>April 2018 &ndash; Present</span>
+        </div>
+      </div>
+
+      <ul class="space-y-2.5 text-gray-600 list-disc pl-5">
+        <li>Architect and maintain high-performance WordPress and WooCommerce installations, utilizing custom _s (Underscores) foundations, advanced ACF Pro configurations, and tailored block editor builds.</li>
+        <li>Write secure, semantic PHP and custom CSS/SCSS architecture, standardizing local compilation workflows via NPM, task runners (Gulp/Grunt), and modern compilers like Vite.</li>
+        <li>Manage production deployment pipelines, Git version control, complex database cleanups, and advanced DNS routing across managed hosting layers like WP Engine and Nexcess.</li>
+        <li>Isolate and resolve platform errors using Query Monitor and server log diagnostics while scaling defense-in-depth security configs, automated backups, and resilient transactional email routing.</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 3: SKILLS TILES (3 Across) -->
+    <section class="space-y-4 avoid-break">
+      <h2 class="text-lg font-bold text-gray-900 px-1">Technical Skills & Competencies</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+        <div class="print-card bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+          <h3 class="font-bold text-gray-900 border-b border-gray-100 pb-2 mb-3">WordPress Core & Dev</h3>
+          <ul class="space-y-1.5 text-sm text-gray-600 list-disc pl-4">
+            <li>Modern Block & Full Site Editing (FSE) themes</li>
+            <li>Classic Theme Architecture & structural PHP</li>
+            <li>Early adopter & developer using <span class="italic">_s (Underscores)</span></li>
+            <li>Advanced Custom Fields (ACF Pro) mapping</li>
+          </ul>
+        </div>
+
+        <div class="print-card bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+          <h3 class="font-bold text-gray-900 border-b border-gray-100 pb-2 mb-3">E-Commerce & Plugins</h3>
+          <ul class="space-y-1.5 text-sm text-gray-600 list-disc pl-4">
+            <li>WooCommerce platform hardening & optimization</li>
+            <li>Events Calendar Pro complex configurations</li>
+            <li>Custom API integrations & endpoint hookups</li>
+            <li>Advanced functional plugin setup & auditing</li>
+          </ul>
+        </div>
+
+        <div class="print-card bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+          <h3 class="font-bold text-gray-900 border-b border-gray-100 pb-2 mb-3">CSS & Frontend Tooling</h3>
+          <ul class="space-y-1.5 text-sm text-gray-600 list-disc pl-4">
+            <li>Modular styling utilizing modern CSS & SCSS</li>
+            <li>Utility-first setups (Tailwind, Basscss, Tachyons)</li>
+            <li>Component layout generation via Bootstrap</li>
+            <li>Responsive layouts matching high-fidelity mockups</li>
+          </ul>
+        </div>
+
+        <div class="print-card bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+          <h3 class="font-bold text-gray-900 border-b border-gray-100 pb-2 mb-3">Build Tools & Workflows</h3>
+          <ul class="space-y-1.5 text-sm text-gray-600 list-disc pl-4">
+            <li>NPM package asset automation pipelines</li>
+            <li>Legacy automation tasks using Gulp & Grunt</li>
+            <li>Modern compilers including Vite & Laravel Mix</li>
+            <li>Version control management utilizing Git / GitHub</li>
+          </ul>
+        </div>
+
+        <div class="print-card bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+          <h3 class="font-bold text-gray-900 border-b border-gray-100 pb-2 mb-3">DevOps & Environments</h3>
+          <ul class="space-y-1.5 text-sm text-gray-600 list-disc pl-4">
+            <li>Managed WP ecosystems (WP Engine, Nexcess, etc.)</li>
+            <li>Advanced DNS configuration & Cloudflare layers</li>
+            <li>WP-CLI scripting & Unix/macOS Terminal controls</li>
+            <li>Email integrations via WP Mail SMTP & FluentSMTP</li>
+          </ul>
+        </div>
+
+        <div class="print-card bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+          <h3 class="font-bold text-gray-900 border-b border-gray-100 pb-2 mb-3">Performance & Security</h3>
+          <ul class="space-y-1.5 text-sm text-gray-600 list-disc pl-4">
+            <li>Debugging via Query Monitor & Debug Bar</li>
+            <li>Caching design (W3 Total Cache) & Image optimization</li>
+            <li>Hardening strategies using Wordfence & Sucuri</li>
+            <li>Automated redundancy via local/remote site backups</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-center space-y-4 pt-4 border-t border-gray-200/60">
+      <div class="flex justify-center items-center space-x-6 no-print">
 
         <!-- GitHub -->
-        <li><a class="main-icon icon-github github" href="https://github.com/seankmchenry" target="_blank" title="GitHub"><img src="img/icons/github.svg" alt="GitHub"></a></li>
+        <a href="https://github.com/seankmchenry" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-600 transition-colors" title="GitHub">
+          <span class="sr-only">GitHub</span>
+          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+        </a>
 
         <!-- GitLab -->
-        <li><a class="main-icon icon-gitlab gitlab" href="https://gitlab.com/seankmchenry" target="_blank" title="gitlab"><img src="img/icons/gitlab.svg" alt="GitLab"></a></li>
+        <a href="https://gitlab.com/smchenrybc" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-600 transition-colors" title="GitLab">
+          <span class="sr-only">GitLab</span>
+          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M23.957 13.585a.513.513 0 0 0-.03-.291l-3.54-10.89a.514.514 0 0 0-.978-.002l-2.58 7.937H7.172l-2.58-7.937a.514.514 0 0 0-.978.002l-3.54 10.89a.513.513 0 0 0 .185.578l11.455 8.322a.514.514 0 0 0 .61 0l11.455-8.322a.513.513 0 0 0 .216-.287z"/>
+          </svg>
+        </a>
 
-        <!-- Twitter -->
-        <li><a class="main-icon icon-twitter twitter" href="https://twitter.com/_smchenry" target="_blank" title="Twitter"><img src="img/icons/twitter.svg" alt="Twitter"></a></li>
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/smchenry_" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-gray-600 transition-colors" title="Instagram">
+          <span class="sr-only">Instagram</span>
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
 
-        <!-- Spotify -->
-        <li><a class="main-icon icon-spotify spotify" href="https://open.spotify.com/user/seankmchenry" target="_blank" title="Spotify"><img src="img/icons/spotify.svg" alt="Spotify"></a></li>
-      </ul>
-    </div>
+        <!-- Spotify (Clean Vector CDN Pull) -->
+        <a href="https://open.spotify.com/user/seankmchenry?si=42072e70277d492e" target="_blank" rel="noopener noreferrer" class="group flex items-center justify-center" title="Spotify">
+          <span class="sr-only">Spotify</span>
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg" alt="Spotify" class="h-5 w-5 opacity-50 group-hover:opacity-60 transition-opacity invert-[30%] Sepia-[5%] pointer-events-none" />
+        </a>
+
+      </div>
+
+      <p class="text-xs text-gray-400 no-print">&copy; 2026 Sean McHenry. Built with Tailwind CSS. Use "Export to PDF" for a hard copy.</p>
+    </footer>
+
   </div>
 
-  <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+  <!-- A small inline script to toggle the visibility safely on DOM completion -->
   <script>
-    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-    function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-    e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-    e.src='https://www.google-analytics.com/analytics.js';
-    r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-    ga('create','UA-38237215-3','auto');ga('send','pageview');
+    document.addEventListener("DOMContentLoaded", function() {
+      // Small delay prevents sudden flashing during resource calculation
+      setTimeout(function() {
+        const wrapper = document.querySelector('.fade-element');
+        if (wrapper) {
+          wrapper.classList.add('visible');
+        }
+      }, 75);
+    });
   </script>
-
 </body>
 </html>
